@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ჩემო პრინცესავ ❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            background-color: #fff0f5;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* მოტივტივე გულების სტილი */
+        .heart-bg {
+            position: absolute;
+            color: rgba(255, 77, 109, 0.3);
+            font-size: 20px;
+            animation: float 6s linear infinite;
+            bottom: -50px;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.6);
+            text-align: center;
+            max-width: 90%;
+            width: 450px;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 { color: #ff4d6d; font-size: 2.2rem; margin-bottom: 20px; }
+        p { color: #ff758f; font-size: 1.4rem; font-weight: bold; }
+
+        .btn-group {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 60px; /* სივრცე ღილაკებისთვის */
+        }
+
+        button {
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-weight: bold;
+        }
+
+        #yesBtn { background-color: #ff4d6d; color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
+        #noBtn { background-color: #ffccd5; color: #ff4d6d; position: relative; }
+
+        /* წერილის სტილი */
+        #letterPage { display: none; }
+        .love-letter {
+            line-height: 1.8;
+            font-size: 1.15rem;
+            color: #4a4a4a;
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mainPage" class="container">
+        <h1>გილოცავ 8 მარტს! 🌸</h1>
+        <p>ჩემო საყვარელო, გიყვარვარ?</p>
+        <div class="btn-group">
+            <button id="yesBtn" onclick="celebrate()">კი 😍</button>
+            <button id="noBtn" onmouseover="moveNoButton()" onclick="moveNoButton()">არა 😢</button>
+        </div>
+    </div>
+
+    <div id="letterPage" class="container">
+        <div class="love-letter">
+            გილოცავ 8 მარტს ჩემო პატარა პრინცესავ❤️<br>
+            ჩემო ბედნიერებავ და სინათლის სხივო❤️<br><br>
+            მადლობა, რომ ჩემს გვერდით ხარ❤️<br>
+            მადლობა, რომ მსოფლიოში ყველაზე ბედნიერ კაცად მაქციე❤️<br><br>
+            შეუდარებელი ხარ❤️ ჩემი გულის დედოფალი ხარ❤️<br>
+            ვერც კი აგიღწერ რა ძლიერ გყვარობ❤️<br><br>
+            ის ერთადერთი ხარ ვისაც მინდა მთელი ჩემი ცხოვრება მივუძღვნა❤️<br>
+            <strong>მიყვარხარ❤️❤️❤️</strong>
+        </div>
+    </div>
+
+    <script>
+        // 1. ფონური გულების შექმნა
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+        setInterval(createHeart, 400);
+
+        // 2. "არა" ღილაკის გაქცევა
+        function moveNoButton() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // 3. ზეიმი და წერილის ჩვენება
+        function celebrate() {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('letterPage').style.display = 'block';
+
+            // ფეიერვერკი და გულების წვიმა
+            var end = Date.now() + (10 * 1000);
+            var colors = ['#ff4d6d', '#ff758f', '#ffffff'];
+
+            (function frame() {
+              confetti({
+                particleCount: 3,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: colors,
+                shapes: ['heart'] // გულების წვიმა
+              });
+              confetti({
+                particleCount: 3,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: colors,
+                shapes: ['heart']
+              });
+
+              if (Date.now() < end) {
+                requestAnimationFrame(frame);
+              }
+            }());
+        }
+    </script>
+</body>
+</html>
